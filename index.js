@@ -28,6 +28,8 @@ async function run() {
 
 
     const userCollection = client.db('MicroNet').collection('users');
+    const taskCollection = client.db('MicroNet').collection('tasks');
+
 
     app.post('/users', async (req, res) => {
         const userInfo = req.body;
@@ -40,6 +42,19 @@ async function run() {
         }
 
         const result = await userCollection.insertOne(userInfo);
+        res.send(result);
+    })
+
+    app.post('/task', async (req, res) => {
+
+        const task = req.body;
+        const result = await taskCollection.insertOne(task);
+        res.send(result);
+
+    })
+
+    app.get('/task', async (req, res) => {
+        const result = await taskCollection.find().toArray();
         res.send(result);
     })
 
