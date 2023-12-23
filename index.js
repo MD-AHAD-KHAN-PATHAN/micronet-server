@@ -66,7 +66,6 @@ async function run() {
     })
     app.get('/task/update/:id', async (req, res) => {
         const id = req.params.id;
-        console.log(id);
         const search = {_id: new ObjectId(id)};
         const result = await taskCollection.findOne(search);
         res.send(result);
